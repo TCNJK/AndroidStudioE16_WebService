@@ -67,11 +67,19 @@ public class MainActivity extends AppCompatActivity {
                             PostAdapter(MainActivity.this, response.body(), new
                             PostAdapter.OnItemClickListener() {
                                 @Override
-                                public void onEditClick(Post post) {
+                                public void onEditClick(int id) {
+                                    Intent intent = new Intent(MainActivity.this,
+                                            UpdatePostActivity.class);
+
+                                    intent.putExtra("post_id", Integer.toString(response.body().get(id).getId()));
+                                    startActivity(intent);
                                 }
 
                                 @Override
-                                public void onDeleteClick(Post post) {
+                                public void onDeleteClick(int id) {
+                                    //delete api
+                                    deletePost(response.body().get(id).getId());
+                                    postAdapter.notifyItemRemoved(id);
                                 }
                             });
                     recyclerView.setAdapter(postAdapter);
@@ -80,6 +88,24 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Post>> call,
+                                  Throwable t) {
+                Toast.makeText(MainActivity.this, "Failed to fetch posts", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void deletePost(int id) {
+        postApiService.deletePost(id).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call,
+                                   Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(MainActivity.this, "Delete to posts success", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call,
                                   Throwable t) {
                 Toast.makeText(MainActivity.this, "Failed to fetch posts", Toast.LENGTH_SHORT).show();
             }

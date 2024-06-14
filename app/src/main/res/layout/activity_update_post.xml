@@ -7,45 +7,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".AddPostActivity">
+
     <TextView
+        android:id="@+id/etId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name" />
+        android:text="id" />
 
     <EditText
-        android:id="@+id/etPdName"
+        android:id="@+id/etTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Title"
         android:minHeight="48dp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CategoryId" />
 
     <EditText
-        android:id="@+id/etPdCategoryId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Title"
-        android:minHeight="48dp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="UnitsInStock" />
-
-    <EditText
-        android:id="@+id/etPdUnitsInStock"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Title"
-        android:minHeight="48dp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="UnitPrice" />
-    <EditText
-        android:id="@+id/etPdUnitPrice"
+        android:id="@+id/etBody"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

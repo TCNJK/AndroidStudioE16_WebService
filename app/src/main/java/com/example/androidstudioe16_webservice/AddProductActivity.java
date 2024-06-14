@@ -39,6 +39,8 @@ public class AddProductActivity extends AppCompatActivity {
         unitsInStock = findViewById(R.id.etPdUnitsInStock);
         unitPrice = findViewById(R.id.etPdUnitPrice);
         productApiService = ProductApiClient.getApiService();
+
+        btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,23 +53,23 @@ public class AddProductActivity extends AppCompatActivity {
                     Toast.makeText(AddProductActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                createProduct(new Product(pdName,pdCategoryId,pdUnitsInStock,pdUnitPrice));
+                createProduct(new Product(pdName, pdCategoryId, pdUnitsInStock, pdUnitPrice));
             }
         });
     }
+
     private void createProduct(Product product) {
         productApiService.create(product).enqueue(new Callback<Product>() {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {
-                if (response.isSuccessful() && response.body() != null) {
+                if (response.isSuccessful()) {
                     Toast.makeText(AddProductActivity.this, "Product created successfully", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
 
             @Override
-            public void onFailure(Call<Product
-                    > call, Throwable t) {
+            public void onFailure(Call<Product> call, Throwable t) {
                 Toast.makeText(AddProductActivity.this, "Failed to create product", Toast.LENGTH_SHORT).show();
             }
         });

@@ -14,6 +14,8 @@ import retrofit2.http.Path;
 public interface PostApiService {
     @GET("posts")
     Call<List<Post>> getPosts();
+    @GET("posts/{id}")
+    Call<Post> getPost(@Path("id") int id);
     @POST("posts")
     Call<Post> createPost(@Body Post post);
     @PUT("posts/{id}")

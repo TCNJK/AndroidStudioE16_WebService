@@ -57,7 +57,7 @@ public class MainActivityProduct extends AppCompatActivity {
     }
 
     private void fetchProducts() {
-        productApiService.get().enqueue(new Callback<List<Product>>() {
+        productApiService.gets().enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call,
                                    Response<List<Product>> response) {

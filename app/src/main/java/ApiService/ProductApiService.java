@@ -14,8 +14,9 @@ import retrofit2.http.Url;
 
 public interface ProductApiService {
     @GET("Product")
+    Call<List<Product>> gets();
+    @GET("Product/{id}")
     Call<List<Product>> get();
-
     @POST("Product")
     Call<Product> create(@Body Product obj);
 
