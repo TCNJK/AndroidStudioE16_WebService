@@ -66,7 +66,7 @@ public class UpdatePostActivity extends AppCompatActivity {
     }
 
     private void updatePost(Post post) {
-        postApiService.updatePost(1, post).enqueue(new Callback<Post>() {
+        postApiService.updatePost(post.getId(), post).enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
                 if (response.isSuccessful() && response.body() != null) {

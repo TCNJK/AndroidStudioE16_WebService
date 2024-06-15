@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onDeleteClick(int id) {
-                                    //delete api
                                     deletePost(response.body().get(id).getId());
                                     postAdapter.notifyItemRemoved(id);
                                 }

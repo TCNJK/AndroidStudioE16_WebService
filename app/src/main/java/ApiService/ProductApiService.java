@@ -16,7 +16,7 @@ public interface ProductApiService {
     @GET("Product")
     Call<List<Product>> gets();
     @GET("Product/{id}")
-    Call<List<Product>> get();
+    Call<Product> get(@Path("id") int id);
     @POST("Product")
     Call<Product> create(@Body Product obj);
 

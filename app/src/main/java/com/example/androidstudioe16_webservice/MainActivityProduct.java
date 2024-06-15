@@ -53,7 +53,6 @@ public class MainActivityProduct extends AppCompatActivity {
                     AddProductActivity.class);
             startActivity(intent);
         });
-        fetchProducts();
     }
 
     private void fetchProducts() {
@@ -67,11 +66,17 @@ public class MainActivityProduct extends AppCompatActivity {
                             ProductAdapter(MainActivityProduct.this, response.body(), new
                             ProductAdapter.OnItemClickListener() {
                                 @Override
-                                public void onEditClick(Product product) {
+                                public void onEditClick(int id) {
+                                    Intent intent = new Intent(MainActivityProduct.this,
+                                            UpdateProductActivity.class);
+
+                                    intent.putExtra("product_id", Integer.toString(response.body().get(id).getId()));
+                                    startActivity(intent);
                                 }
 
                                 @Override
-                                public void onDeleteClick(Product product) {
+                                public void onDeleteClick(int id) {
+                                    deleteProduct(response.body().get(id).getId());
                                 }
                             });
                     recyclerView.setAdapter(productAdapter);
@@ -84,5 +89,29 @@ public class MainActivityProduct extends AppCompatActivity {
                 Toast.makeText(MainActivityProduct.this, "Failed to fetch product", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    private void deleteProduct(int id) {
+        productApiService.delete(id).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call,
+                                   Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(MainActivityProduct.this, "Delete to product success", Toast.LENGTH_SHORT).show();
+                    fetchProducts();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call,
+                                  Throwable t) {
+                Toast.makeText(MainActivityProduct.this, "Failed to fetch product", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    @Override
+    protected void onResume() {
+        //just call when other layout back to this
+        super.onResume();
+        fetchProducts();
     }
 }

@@ -27,11 +27,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         void onDeleteClick(int id);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.listener = listener;
-    }
-
-
     public PostAdapter(Context context, List<Post> postList, OnItemClickListener listener) {
         this.context = context;
         this.postList = postList;
